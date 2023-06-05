@@ -2,13 +2,24 @@
 #include <stdlib.h>
 #include "garbage.h"
 
-
+    int *arrayBlock = NULL;
+    int *arrayPointer = NULL;
+    int *arrayReference = NULL;
+    int *arraySZ = NULL;
+    int *arrayCantReference = NULL;
+    int memMax;
 
 //Declarar las variables del módulo
 
 int init_gc(int max_mem)
 {
-	//TODO
+	//Damos inicio al GC
+    max_mem = memMax;
+   
+    if (max_mem <= 0)
+        return ERROR; 
+    else
+        return OK;
 }
 
 int new_block(int sz,char* name)
