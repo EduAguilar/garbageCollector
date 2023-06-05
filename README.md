@@ -78,6 +78,8 @@ int init_gc(int max_mem);
 
 int new_block(int sz,char name[]);
 
+int* mem_ptr(int block);
+
 int resize(int block, int sz);
 
 int add_reference(int block);
