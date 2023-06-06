@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "../include/garbage.h"
+#include "garbage.c"
 
 
 int main() {
@@ -9,6 +11,7 @@ int main() {
 
 	// Prueba de init_gc
 	init_gc(max_mem);
+
 
 	// Prueba de new_block
 	block1 = new_block(200, "Block 1");
@@ -40,5 +43,6 @@ int main() {
 
 	// Prueba de destroy_agent
 	destroy_agent();
+	
 	return 0;
 }
