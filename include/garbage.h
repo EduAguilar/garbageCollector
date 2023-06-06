@@ -32,4 +32,4 @@ int cur_available_memory(void);
 //Destructor del GC.
 int destroy_agent();
 
-void copia_cadena(char *str,int pos);
+//void copia_cadena(char *str,int pos);

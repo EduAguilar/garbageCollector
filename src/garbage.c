@@ -3,13 +3,13 @@
 #include "../include/garbage.h"
 #include <string.h>
 
-    int *arrayBlock = NULL;
-    int *arrayPointer = NULL;
-    char **arrayReference = NULL;
-    int *arraySZ = NULL;
-    int *arrayCantReference = NULL;
-    int memMax;
-    int pos;
+    int *arrayBlock = NULL; //array de bloques
+    int *arrayPointer = NULL; //array de punteros
+    char **arrayReference = NULL; //array de referencias
+    int *arraySZ = NULL; //array de tamaños de memoria de cada bloque
+    int *arrayCantReference = NULL; //array de cantidades de referencias
+    int memMax; //memoria máxima
+    int pos; //posición de los arrays
     
 
 //Declarar las variables del módulo
@@ -28,15 +28,15 @@ int init_gc(int max_mem)
 
 int new_block(int sz,char* name)
 {
-        int *block=NULL; //se inicializa con punteros nulos
         int memDisponible = cur_available_memory(); //se obtiene la memoria disponible
          
     if (sz>0 && sz<memDisponible){
-        if (block !=NULL){
-            block=(int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al bloque
+        int *block = (int*)malloc(sizeof(int)*sz); //se asigna la memoria dinamica al bloque
+    
+        if (block !=NULL){            
             arrayPointer[pos] = block; //asigna el puntero al array de punteros
             arrayBlock[pos] = pos; //asigna el numero de bloque al array de bloques
-            arraySZ[pos] = sz; //asigna el tamaño al array de tamaños
+            arraySZ[pos] = sz; //asigna el tamaño al array de tamaños de memoria de cada bloque
             arrayCantReference[pos] = 1; //asigna la cantidad de referencias al array de cantidades de referencias
             strcpy(arrayReference[pos],name); //asigna el nombre de referencia al array de referencias
 
@@ -94,12 +94,17 @@ int remove_reference(int block)
 
 int cur_used_memory(void)
 {
-    //TODO
+    int used_memory = 0;
+    for (int i = 0; i < pos; i++)
+    {
+        used_memory += arraySZ[i];
+    }
+    return used_memory;
 }
 
 int cur_available_memory(void)
 {
-    //TODO
+    return memMax - cur_used_memory();
 }
 
 
@@ -108,7 +113,7 @@ int destroy_agent()
     //TODO
 }
 
-
+/*
 void copia_cadena(char *str,int pos){
     printf("copia: \n");
     arrayReference[pos] = (char*)malloc(sizeof(char)*strlen(str));
@@ -116,3 +121,4 @@ void copia_cadena(char *str,int pos){
     printf("%s\n",arrayReference[pos]);  
 
 }
+*/
