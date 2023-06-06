@@ -77,9 +77,11 @@ int* mem_ptr(int block)
 
 int resize(int block, int sz)
 {
+    /*
     block = realloc(block, sizeof(int)*sz);
     arrayBlock = realloc(block, sizeof(int)*sz);
     return block;
+    */
 }
 
 int add_reference(int block)
