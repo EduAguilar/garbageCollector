@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "garbage.h"
+#include <string.h>
 
     int *arrayBlock = NULL;
-    int *arrayPointer = NULL;
+    char **arrayPointer = NULL;
     int *arrayReference = NULL;
     int *arraySZ = NULL;
     int *arrayCantReference = NULL;
@@ -24,7 +25,22 @@ int init_gc(int max_mem)
 
 int new_block(int sz,char* name)
 {
-    //TODO
+        int *block=NULL; //se inicializa la estructura con punteros nulos
+        int memDisponible = cur_available_memory();
+
+    if (sz>0 && sz<memDisponible){
+        if (block !=NULL){
+            block=(int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al bloque
+            
+            //arrayReference =name; //agregamos referencia al bloque
+            //arraySZ = sz;
+
+        }
+        else{
+            return ERROR;
+        }
+    }
+    return block;
 }
 
 int* mem_ptr(int block)
