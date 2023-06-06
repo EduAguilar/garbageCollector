@@ -65,7 +65,14 @@ int new_block(int sz,char* name)
 
 int* mem_ptr(int block)
 {
-    //TODO
+    if (block < 0 || block >= pos)
+    {
+        return ERROR;
+    }
+    else
+    {
+        return arrayPointer[block];
+    }
 }
 
 int resize(int block, int sz)
