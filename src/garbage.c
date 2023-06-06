@@ -9,6 +9,7 @@
     int *arraySZ = NULL;
     int *arrayCantReference = NULL;
     int memMax;
+    int pos = 0;
     
 
 //Declarar las variables del módulo
@@ -34,17 +35,24 @@ int new_block(int sz,char* name)
         if (block !=NULL){
             block=(int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al bloque
             arrayReference = (char**)malloc(sizeof(char*)*sz); //asigna la memoria dinamica al array de referencias
+            copia_cadena(name,0);
+
+
             arraySZ = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de tamaños
             arrayCantReference = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de cantidades de referencias
             arrayPointer = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de punteros
             arrayBlock = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de bloques
+            pos++;
+    
+            return OK;
            
         }
         else{
             return ERROR;
         }
     }
-    return OK;
+   
+
 }
 
 
@@ -82,4 +90,13 @@ int cur_available_memory(void)
 int destroy_agent()
 {
     //TODO
+}
+
+
+void copia_cadena(char *str,int pos){
+    printf("copia: \n");
+    arrayReference[pos] = (char*)malloc(sizeof(char)*strlen(str));
+    strcpy(arrayReference[pos],str);
+    printf("%s\n",arrayReference[pos]);  
+
 }
