@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "garbage.h"
+#include "../include/garbage.h"
+#include <string.h>
 
-    int *arrayBlock = NULL;
-    int *arrayPointer = NULL;
-    int *arrayReference = NULL;
-    int *arraySZ = NULL;
-    int *arrayCantReference = NULL;
-    int memMax;
+    int *arrayBlock = NULL; //array de bloques
+    int *arrayPointer = NULL; //array de punteros
+    char **arrayReference = NULL; //array de referencias
+    int *arraySZ = NULL; //array de tamaños de memoria de cada bloque
+    int *arrayCantReference = NULL; //array de cantidades de referencias
+    int memMax; //memoria máxima
+    int pos; //posición de los arrays
+    
 
 //Declarar las variables del módulo
 
@@ -15,6 +18,7 @@ int init_gc(int max_mem)
 {
 	//Damos inicio al GC
     max_mem = memMax;
+    pos = 0;
    
     if (max_mem <= 0)
         return ERROR; 
@@ -24,17 +28,60 @@ int init_gc(int max_mem)
 
 int new_block(int sz,char* name)
 {
-    //TODO
+        int memDisponible = cur_available_memory(); //se obtiene la memoria disponible
+         
+    if (sz>0 && sz<memDisponible){
+        int *block = (int*)malloc(sizeof(int)*sz); //se asigna la memoria dinamica al bloque
+    
+        if (block !=NULL){            
+            arrayPointer[pos] = block; //asigna el puntero al array de punteros
+            arrayBlock[pos] = pos; //asigna el numero de bloque al array de bloques
+            arraySZ[pos] = sz; //asigna el tamaño al array de tamaños de memoria de cada bloque
+            arrayCantReference[pos] = 1; //asigna la cantidad de referencias al array de cantidades de referencias
+            strcpy(arrayReference[pos],name); //asigna el nombre de referencia al array de referencias
+
+            /* para revisar si es necesario y en donde iría
+            arrayReference = (char**)malloc(sizeof(char*)*sz); //asigna la memoria dinamica al array de referencias
+            arraySZ = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de tamaños
+            arrayCantReference = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de cantidades de referencias
+            arrayPointer = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de punteros
+            arrayBlock = (int*)malloc(sizeof(int)*sz); //asigna la memoria dinamica al array de bloques
+            */
+
+            pos++;
+    
+            return OK;
+           
+        }
+        else{
+            return ERROR;
+        }
+    }
+    else{
+        return ERROR;
+    }
 }
+
 
 int* mem_ptr(int block)
 {
-    //TODO
+    if (block < 0 || block >= pos)
+    {
+        return ERROR;
+    }
+    else
+    {
+        return arrayPointer[block];
+    }
 }
 
 int resize(int block, int sz)
 {
-    //TODO
+    /*
+    block = realloc(block, sizeof(int)*sz);
+    arrayBlock = realloc(block, sizeof(int)*sz);
+    return block;
+    */
 }
 
 int add_reference(int block)
@@ -49,12 +96,17 @@ int remove_reference(int block)
 
 int cur_used_memory(void)
 {
-    //TODO
+    int used_memory = 0;
+    for (int i = 0; i < pos; i++)
+    {
+        used_memory += arraySZ[i];
+    }
+    return used_memory;
 }
 
 int cur_available_memory(void)
 {
-    //TODO
+    return memMax - cur_used_memory();
 }
 
 
@@ -62,3 +114,13 @@ int destroy_agent()
 {
     //TODO
 }
+
+/*
+void copia_cadena(char *str,int pos){
+    printf("copia: \n");
+    arrayReference[pos] = (char*)malloc(sizeof(char)*strlen(str));
+    strcpy(arrayReference[pos],str);
+    printf("%s\n",arrayReference[pos]);  
+
+}
+*/

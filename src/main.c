@@ -1,20 +1,41 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "../include/garbage.h"
+#include "garbage.c"
 
 
 int main() {
 	int max_mem = 1000;
 	int block1, block2, block3, block4;
 
+//prueba de init_gc y new_block
+	int sz; //sz: memoria pedida por el cliente
+    int *p;
+    char name[10]; //texto con la firma del proceso
+    init_gc(max_mem); //llama a la funcion init_gc
+    printf("Ingrese un la cantidad de memoria necesaria para el bloque:\n"); //el sistema recibe pedidos de memoria por parte del cliente
+    scanf("%d",&sz);
+    getchar();
+    printf("Ingrese el nombre del nuevo bloque de memoria:\n");
+    scanf(" %s",name);
+    block1 = new_block(sz, name); //llama a la funcion new_block
+	printf("El bloque de memoria %s tiene %d bytes de memoria.\n", name, sz);
+	printf("Block 1: %d\n", block1);
+
+    return 0;
+
+/*
 	// Prueba de init_gc
 	init_gc(max_mem);
+
 
 	// Prueba de new_block
 	block1 = new_block(200, "Block 1");
 	block2 = new_block(300, "Block 2");
 	block3 = new_block(150, "Block 3");
 	block4 = new_block(400, "Block 4");
+	printf("Block 1: %d\n", block1);
 
 	// Prueba de resize
 	resize(block2, 400);
@@ -40,5 +61,7 @@ int main() {
 
 	// Prueba de destroy_agent
 	destroy_agent();
+	
 	return 0;
+	*/
 }
