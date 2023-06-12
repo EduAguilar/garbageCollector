@@ -1,9 +1,5 @@
 #include <stdio.h>
-#include <string.h>
-
-#include "../include/garbage.h"
 #include "garbage.c"
-
 
 int main() {
 	int max_mem = 1000;
