@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> // libreria que contiene las funciones malloc y realloc
 #include <string.h> // libreria que contiene las funciones strcpy y strlen
-#include "garbage.h" // header que contiene las constantes OK y ERROR, y declaraciones de funciones 
+#include "include/garbage.h" // header que contiene las constantes OK y ERROR, y declaraciones de funciones
 
 int max_mem=1000; //se define la cantidad de memoria disponible que administrara el sistema
 // Variables globales
