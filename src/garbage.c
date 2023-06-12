@@ -96,16 +96,77 @@ int resize(int block, int sz)
     arrayBlock = realloc(block, sizeof(int)*sz);
     return block;
     */
+/*
+int resize(int block, int sz)
+{
+    if (block < 0 || block >= pos)
+    {
+        return ERROR; // Identificador de bloque inválido
+    }
+
+    int* new_block = realloc(arrayPointer[block], sizeof(int) * sz);
+    if (new_block != NULL)
+    {
+        arrayPointer[block] = new_block;
+        arraySZ[block] = sz;
+        return OK;
+    }
+    else
+    {
+        return ERROR; // No se pudo redimensionar el bloque de memoria
+    }
+}
+*/	
 }
 
 int add_reference(int block)
 {
-    //TODO
+    /* int add_reference(int block) //Esta función debe incrementar el contador de referencias del bloque dado por block
+{
+    if (block < 0 || block >= pos)
+    {
+        return ERROR; // Identificador de bloque inválido
+    }
+
+    arrayCantReference[block]++;
+    return OK;
+}
+*/
 }
 
 int remove_reference(int block)
 {
-    //TODO
+    /*int remove_reference(int block) //Esta función debe decrementar el contador de referencias 
+                                     //del bloque dado por block y, si el contador llega a cero, liberar el bloque de memoria correspondiente
+{
+    if (block < 0 || block >= pos)
+    {
+        return ERROR; // Identificador de bloque inválido
+    }
+
+    arrayCantReference[block]--;
+
+    if (arrayCantReference[block] == 0)
+    {
+        free(arrayPointer[block]);
+        free(arrayReference[block]);
+
+        // Desplazar los elementos restantes del array hacia atrás
+        for (int i = block; i < pos - 1; i++)
+        {
+            arrayPointer[i] = arrayPointer[i + 1];
+            arrayBlock[i] = arrayBlock[i + 1];
+            arraySZ[i] = arraySZ[i + 1];
+            arrayReference[i] = arrayReference[i + 1];
+            arrayCantReference[i] = arrayCantReference[i + 1];
+        }
+
+        pos--;
+    }
+
+    return OK;
+}
+*/
 }
 
 int cur_used_memory(void)
