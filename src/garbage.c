@@ -44,7 +44,7 @@ int new_block(int sz,char* name)
     //printf("name: %s\n", name);
     //printf("pos: %d\n", pos);
          
-    if (sz>0 && sz<memDisponible){
+    if (sz>0 && sz<=memDisponible){
         
         int *block = (int*)malloc(sizeof(int)*sz); //se asigna la memoria dinamica al bloque
         arrayReference [pos] = (char**)malloc(sizeof(char)*strlen(name)); //asigna la memoria dinamica al array de referencias
