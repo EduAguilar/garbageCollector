@@ -187,5 +187,22 @@ int cur_available_memory(void)
 
 int destroy_agent()
 {
-    //TODO
+    /*void destroy_agent()
+{
+    for (int i = 0; i < pos; i++)
+    {
+        free(arrayPointer[i]);
+        free(arrayReference[i]);
+    }
+
+    free(arrayPointer);
+    free(arrayBlock);
+    free(arraySZ);
+    free(arrayReference);
+    free(arrayCantReference);
+
+    pos = 0;
+    used_memory = 0;
+}
+*/
 }
