@@ -39,10 +39,10 @@ int init_gc(int max_mem)
 int new_block(int sz,char* name)
 {
     int memDisponible = cur_available_memory(); //se obtiene la memoria disponible
-    //printf("Memoria disponible dentro del new_block: %d\n", memDisponible);
-    //printf("sz: %d\n", sz);
-    //printf("name: %s\n", name);
-    //printf("pos: %d\n", pos);
+    printf("Memoria disponible dentro del new_block: %d\n", memDisponible);
+    printf("sz: %d\n", sz);
+    printf("name: %s\n", name);
+    printf("pos: %d\n", pos);
          
     if (sz>0 && sz<memDisponible){
         
@@ -70,7 +70,7 @@ int new_block(int sz,char* name)
         }
     }
     else{
-        //printf("Ya no hay memoria disponible.\n");
+        printf("Ya no hay memoria disponible.\n");
         return ERROR;
     }
 }

@@ -9,23 +9,8 @@ int main() {
 	int max_mem = 1000;
 	int block1, block2, block3, block4;
 
-//prueba de init_gc y new_block
-	int sz; //sz: memoria pedida por el cliente
-    int *p;
-    char name[10]; //texto con la firma del proceso
-    init_gc(max_mem); //llama a la funcion init_gc
-    printf("Ingrese un la cantidad de memoria necesaria para el bloque:\n"); //el sistema recibe pedidos de memoria por parte del cliente
-    scanf("%d",&sz);
-    getchar();
-    printf("Ingrese el nombre del nuevo bloque de memoria:\n");
-    scanf(" %s",name);
-    block1 = new_block(sz, name); //llama a la funcion new_block
-	printf("El bloque de memoria %s tiene %d bytes de memoria.\n", name, sz);
-	printf("Block 1: %d\n", block1);
+//prueba de init_gc y new_block con caso de prueba
 
-    return 0;
-
-/*
 	// Prueba de init_gc
 	init_gc(max_mem);
 
@@ -35,8 +20,8 @@ int main() {
 	block2 = new_block(300, "Block 2");
 	block3 = new_block(150, "Block 3");
 	block4 = new_block(400, "Block 4");
-	printf("Block 1: %d\n", block1);
-
+	
+/*
 	// Prueba de resize
 	resize(block2, 400);
 	resize(block4, 250);
@@ -50,18 +35,18 @@ int main() {
 	// Prueba de remove_reference
 	remove_reference(block2);
 	remove_reference(block2); // Quitar una referencia más al mismo bloque
-
+*/
 	// Prueba de used_memory
-	int used_mem = used_memory();
+	int used_mem = cur_used_memory();
 	printf("Used memory: %d\n", used_mem);
 
 	// Prueba de available_memory
-	int available_mem = available_memory();
+	int available_mem = cur_available_memory();
 	printf("Available memory: %d\n", available_mem);
 
 	// Prueba de destroy_agent
 	destroy_agent();
 	
 	return 0;
-	*/
+	
 }
