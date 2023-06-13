@@ -17,7 +17,6 @@ int main() {
         printf("Ingrese un texto con la firma del proceso:\n");
         fgets(name, sizeof(name), stdin);
 
-//sz <= cur_available_memory()
         if (sz <= cur_available_memory()){ 
             if (new_block(sz, name)==OK){ //llama a la funcion new_block
                 printf("El bloque de memoria ha sido reservado con la firma %s\n", name);
@@ -30,7 +29,6 @@ int main() {
             printf("No se reservo el bloque de memoria, la memoria es insuficiente.\n");
             printf("Su memoria disponible es: %d\n", cur_available_memory());
             printf("Asigne menos memoria al nuevo bloque\n");
-            //break;
         }
         if(cur_available_memory()==0){ //si no queda memoria disponible
         printf("Ya No hay memoria disponible\n");
@@ -38,8 +36,15 @@ int main() {
         }
         printf("Desea crear otro bloque de memoria? (1: Si / 0: No): ");
         scanf(" %i",&opcion);     
-    }
+    }   
 
+    /*test de impresion del contenido de arrays (cambiar nombre de array para probar otro)
+    printf("elementos de arrayReference: \n");
+    for(int i=0;i<pos;i++)
+    {
+        printf("%s\n",arrayReference[i]);
+    }
+    */
     return 0;	
 
 

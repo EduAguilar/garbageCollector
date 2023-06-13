@@ -3,6 +3,7 @@
 #include "../include/garbage.h"
 #include <string.h>
 
+//Declarar las variables del módulo    
     int *arrayBlock = NULL; //array de bloques
     int *arrayPointer = NULL; //array de punteros
     char **arrayReference = NULL; //array de referencias
@@ -10,13 +11,8 @@
     int *arrayCantReference = NULL; //array de cantidades de referencias
     int memMax; //memoria máxima
     int pos; //posición de los arrays
-    int used_memory = 0; //memoria utilizada
     
-
-    
-
-//Declarar las variables del módulo
-
+//Declarar las funciones del módulo
 int init_gc(int max_mem)
 {
 	//Damos inicio al GC
@@ -54,16 +50,12 @@ int new_block(int sz,char* name)
             
             arrayBlock[pos] = pos; //asigna el numero de bloque al array de bloques
             arraySZ[pos] = sz; //asigna el tamaño al array de tamaños de memoria de cada bloque
-            //arraySZ = (int*)realloc(arraySZ, sizeof(int)*(pos+2)); //asigna la memoria dinamica al array de tamaños
             arrayCantReference[pos] = 1; //asigna la cantidad de referencias al array de cantidades de referencias
             strcpy(arrayReference[pos],name); //asigna el nombre de referencia al array de referencias
-            //printf("text: %s\n", arrayReference[pos]);
-
-
+            
             pos++;
 
             return OK;
-           
         }
         else{
             return ERROR;
@@ -186,15 +178,15 @@ int cur_available_memory(void)
 
 
 int destroy_agent()
-{
-    /*void destroy_agent()
-{
-    for (int i = 0; i < pos; i++)
+{    //destroy_agent() //Esta función debe liberar toda la memoria reservada por el GC
+    
+    //liberamos la memoria de los arrays punteros
+    for (int i = 0; i < pos; i++) 
     {
-        free(arrayPointer[i]);
         free(arrayReference[i]);
     }
 
+    //libera la memoria de los arrays
     free(arrayPointer);
     free(arrayBlock);
     free(arraySZ);
@@ -202,7 +194,4 @@ int destroy_agent()
     free(arrayCantReference);
 
     pos = 0;
-    used_memory = 0;
-}
-*/
 }
