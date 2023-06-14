@@ -12,10 +12,9 @@
     int memMax; //memoria máxima
     int pos; //posición de los arrays
     
-//Declarar las funciones del módulo
-int init_gc(int max_mem)
+//Se declara las funciones del módulo
+int init_gc(int max_mem) //Esta función inicializa el GC.
 {
-	//Damos inicio al GC
     memMax = max_mem;
     pos = 0;
 
@@ -32,7 +31,7 @@ int init_gc(int max_mem)
         return OK;
 }
 
-int new_block(int sz,char* name)
+int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria.
 {
     int memDisponible = cur_available_memory(); //se obtiene la memoria disponible
     //printf("Memoria disponible dentro del new_block: %d\n", memDisponible);
@@ -67,7 +66,7 @@ int new_block(int sz,char* name)
     }
 }
 
-int* mem_ptr(int block)
+int* mem_ptr(int block) //Esta función devuelve el puntero al bloque de memoria dado
 {
     if (block < 0 || block >= pos)
     {
@@ -79,7 +78,7 @@ int* mem_ptr(int block)
     }
 }
 
-int resize(int block, int sz)
+int resize(int block, int sz) //Esta función cambia el tamaño de memoria del bloque dado
 {
     if (block < 0 || block >= pos)
     {
@@ -104,7 +103,7 @@ int resize(int block, int sz)
     return OK;
 }
 
-int add_reference(int block) //Esta función debe incrementar el contador de referencias del bloque dado por block
+int add_reference(int block) //Esta función incrementa el contador de referencias del bloque dado
 {
     if (block < 0 || block >= pos)
     {
@@ -116,24 +115,22 @@ int add_reference(int block) //Esta función debe incrementar el contador de ref
     return OK;
 }
 
-int remove_reference(int block)
-{
-    /*int remove_reference(int block) //Esta función debe decrementar el contador de referencias 
-                                     //del bloque dado por block y, si el contador llega a cero, liberar el bloque de memoria correspondiente
+int remove_reference(int block) //Esta función decrementa el contador de referencias del bloque dado
 {
     if (block < 0 || block >= pos)
     {
-        return ERROR; // Identificador de bloque inválido
+        printf("Error: índice de bloque inválido\n");
+        return ERROR;
     }
 
-    arrayCantReference[block]--;
+    arrayCantReference[block]--; //se decrementa el contador de referencias del bloque dado
 
-    if (arrayCantReference[block] == 0)
+    if (arrayCantReference[block] == 0) // Si el contador de referencias llega a cero, se liberar el bloque de memoria correspondiente.
     {
         free(arrayPointer[block]);
         free(arrayReference[block]);
 
-        // Desplazar los elementos restantes del array hacia atrás
+        // Desplazar los elementos restantes del array hacia atrás, para no dejar espacios vacíos
         for (int i = block; i < pos - 1; i++)
         {
             arrayPointer[i] = arrayPointer[i + 1];
@@ -142,16 +139,12 @@ int remove_reference(int block)
             arrayReference[i] = arrayReference[i + 1];
             arrayCantReference[i] = arrayCantReference[i + 1];
         }
-
         pos--;
     }
-
     return OK;
 }
-*/
-}
 
-int cur_used_memory(void)
+int cur_used_memory(void) //Esta función calcula y devuelve la cantidad de memoria usada
 {
     int used_memory = 0;
     for (int i = 0; i < pos; i++)
@@ -161,15 +154,13 @@ int cur_used_memory(void)
     return used_memory;
 }
 
-int cur_available_memory(void)
+int cur_available_memory(void) //Esta función devuelve la cantidad de memoria disponible
 {
     return (memMax - cur_used_memory());
 }
 
-
-int destroy_agent()
-{    //destroy_agent() //Esta función debe liberar toda la memoria reservada por el GC
-    
+int destroy_agent() //Esta función libera toda la memoria reservada por el GC
+{        
     //liberamos la memoria de los arrays punteros
     for (int i = 0; i < pos; i++) 
     {
