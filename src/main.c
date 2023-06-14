@@ -4,7 +4,7 @@
 int main() {
 
     //Caso de prueba para aprobacion propio N°1---------------------------------------------
-/*
+
     char name[20]; //texto con la firma del proceso
     int sz =1; //tamaño de memoria
     int opcion =1; //variable para elegir si se quiere seguir creando bloques de memoria
@@ -21,12 +21,11 @@ int main() {
         fgets(name, sizeof(name), stdin);
 
         if (sz <= cur_available_memory()){ 
-            if (new_block(sz, name)==OK){ //llama a la funcion new_block
-                printf("El bloque de memoria ha sido reservado con la firma %s\n", name);
-                printf("Identificador: Bloque %i - Memoria reservada: %i - Nombre %s\n", arrayBlock[i], arraySZ[i], name);
-                printf("Memoria disponible: %d\n", cur_available_memory());
-                i++;
-            }
+            new_block(sz, name); //llama a la funcion new_block
+            printf("El bloque de memoria ha sido reservado con la firma %s\n", name);
+            printf("Identificador: Bloque %i - Memoria reservada: %i - Nombre %s\n", arrayBlock[i], arraySZ[i], name);
+            printf("Memoria disponible: %d\n", cur_available_memory());
+            i++;
         }
         else{
             printf("No se reservo el bloque de memoria, la memoria es insuficiente.\n");
@@ -35,23 +34,17 @@ int main() {
         }
         if(cur_available_memory()==0){ //si no queda memoria disponible
         printf("Ya No hay memoria disponible\n");
+        destroy_agent(); //llama a la funcion destroy_agent
         break;
         }
         printf("Desea crear otro bloque de memoria? (1: Si / 0: No): ");
         scanf(" %i",&opcion);     
     }   
 
-    /*test de impresion del contenido de arrays (cambiar nombre de array para probar otro)
-    printf("elementos de arrayReference: \n");
-    for(int i=0;i<pos;i++)
-    {
-        printf("%s\n",arrayReference[i]);
-    }
-    */
-    //return 0;	*/
+    return 0;
 //Fin Caso de prueba para aprobacion propio N°1---------------------------------------------
 
-
+/*
 // Caso de prueba para aprobacion del tp    --------------------------------------------- 
     int max_mem = 1000;
 	int block1, block2, block3, block4;
@@ -95,4 +88,5 @@ int main() {
 	
 	return 0;
 // Fin caso de prueba para aprobacion del tp    --------------------------------------------- 	
+*/
 }
