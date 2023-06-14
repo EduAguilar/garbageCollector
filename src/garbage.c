@@ -67,8 +67,6 @@ int new_block(int sz,char* name)
     }
 }
 
-
-
 int* mem_ptr(int block)
 {
     if (block < 0 || block >= pos)
@@ -83,47 +81,39 @@ int* mem_ptr(int block)
 
 int resize(int block, int sz)
 {
-    /*
-    block = realloc(block, sizeof(int)*sz);
-    arrayBlock = realloc(block, sizeof(int)*sz);
-    return block;
-    */
-/*
-int resize(int block, int sz)
-{
     if (block < 0 || block >= pos)
     {
-        return ERROR; // Identificador de bloque inválido
+        printf("Error: índice de bloque inválido\n");
+        return ERROR;
+    }
+    if (sz <= 0) {
+        printf("Error: Tamaño de memoria del bloque inválido\n");
+        return ERROR;
     }
 
-    int* new_block = realloc(arrayPointer[block], sizeof(int) * sz);
-    if (new_block != NULL)
+    int* new_block = (int*)realloc(arrayPointer[block], sizeof(int) * sz);
+    
+    if (new_block == NULL)
     {
-        arrayPointer[block] = new_block;
-        arraySZ[block] = sz;
-        return OK;
-    }
-    else
-    {
-        return ERROR; // No se pudo redimensionar el bloque de memoria
-    }
-}
-*/	
-}
-
-int add_reference(int block)
-{
-    /* int add_reference(int block) //Esta función debe incrementar el contador de referencias del bloque dado por block
-{
-    if (block < 0 || block >= pos)
-    {
-        return ERROR; // Identificador de bloque inválido
+        printf("Error: no se pudo cambiar el tamaño de memoria del bloque\n");
+        return ERROR;
     }
 
-    arrayCantReference[block]++;
+    arrayPointer[block] = new_block; //se actualiza el punteros
+    arraySZ[block] = sz; //se actualiza el tamaño de memoria del bloque
     return OK;
 }
-*/
+
+int add_reference(int block) //Esta función debe incrementar el contador de referencias del bloque dado por block
+{
+    if (block < 0 || block >= pos)
+    {
+        printf("Error: índice de bloque inválido\n");
+        return ERROR;
+    }
+
+    arrayCantReference[block]++; //se incrementa el contador de referencias del bloque dado
+    return OK;
 }
 
 int remove_reference(int block)
