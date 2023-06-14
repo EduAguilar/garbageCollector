@@ -5,7 +5,7 @@
 
 //Declarar las variables del módulo    
     int *arrayBlock = NULL; //array de bloques
-    int *arrayPointer = NULL; //array de punteros
+    int **arrayPointer = NULL; //array de punteros
     char **arrayReference = NULL; //array de referencias
     int *arraySZ = NULL; //array de tamaños de memoria de cada bloque
     int *arrayCantReference = NULL; //array de cantidades de referencias
@@ -23,7 +23,7 @@ int init_gc(int max_mem) //Esta función inicializa el GC.
     arraySZ = (int*)malloc(sizeof(int)*1); //asigna la memoria dinamica al array de tamaños
     arrayReference = (char**)malloc(sizeof(char*)*1); //asigna la memoria dinamica al array de referencias
     arrayCantReference = (int*)malloc(sizeof(int)*1); //asigna la memoria dinamica al array de cantidades de referencias
-    arrayPointer = (int*)malloc(sizeof(int)*1); //asigna la memoria dinamica al array de punteros
+    arrayPointer = (int**)malloc(sizeof(int*)*1); //asigna la memoria dinamica al array de punteros
     arrayBlock = (int*)malloc(sizeof(int)*1); //asigna la memoria dinamica al array de bloques
    
     if (max_mem <= 0)
@@ -95,17 +95,16 @@ int resize(int block, int sz) //Esta función cambia el tamaño de memoria del b
         return ERROR;
     }
 
-    printf("estoy en resize, antes del realloc\n");
-
-    int* new_block = (int*)realloc(arrayPointer[block], sizeof(int) * sz);
+    int* resize_block = (int*)realloc(arrayPointer[block], sizeof(int) * sz);
     
-    if (new_block == NULL)
+    printf("estoy en resize, despues del realloc\n");
+    if (resize_block == NULL)
     {
         printf("Error: no se pudo cambiar el tamaño de memoria del bloque\n");
         return ERROR;
     }
 
-    arrayPointer[block] = new_block; //se actualiza el punteros
+    arrayPointer[block] = resize_block; //se actualiza el punteros
     arraySZ[block] = sz; //se actualiza el tamaño de memoria del bloque
     return OK;
 }
