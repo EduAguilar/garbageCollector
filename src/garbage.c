@@ -38,7 +38,7 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
     if (sz>0 && sz<=memDisponible){
         
         int *block = (int*)malloc(sizeof(int)*sz); //se asigna la memoria dinamica al bloque
-        arrayReference [pos] = (char**)malloc(sizeof(char)*strlen(name)); //asigna la memoria dinamica al array de referencias
+        arrayReference [pos] = (char*)malloc(sizeof(char)*strlen(name)); //asigna la memoria dinamica al array de referencias
                 
         if (block !=NULL){            
             arrayPointer[pos] = block; //asigna el puntero al array de punteros            
@@ -71,7 +71,7 @@ int* mem_ptr(int block) //Esta función devuelve el puntero al bloque de memoria
 {
     if (block < 0 || block >= pos)
     {
-        return ERROR;
+        return (int*)ERROR;
     }
     else
     {
@@ -83,11 +83,11 @@ int resize(int block, int sz) //Esta función cambia el tamaño de memoria del b
 {
     if (block < 0 || block >= pos)
     {
-        printf("Error: índice de bloque inválido\n");
+        printf("Error: indice de bloque invalido\n");
         return ERROR;
     }
     if (sz <= 0) {
-        printf("Error: Tamaño de memoria del bloque inválido\n");
+        printf("Error: Tamaño de memoria del bloque invalido\n");
         return ERROR;
     }
 
@@ -108,7 +108,7 @@ int add_reference(int block) //Esta función incrementa el contador de referenci
 {
     if (block < 0 || block >= pos)
     {
-        printf("Error: índice de bloque inválido\n");
+        printf("Error: indice de bloque invalido\n");
         return ERROR;
     }
 
@@ -120,7 +120,7 @@ int remove_reference(int block) //Esta función decrementa el contador de refere
 {
     if (block < 0 || block >= pos)
     {
-        printf("Error: índice de bloque inválido\n");
+        printf("Error: indice de bloque invalido\n");
         return ERROR;
     }
 
