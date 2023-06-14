@@ -55,7 +55,7 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
             strcpy(arrayReference[pos],name); //asigna el nombre de referencia al array de referencias
             
             pos++;
-            printf("arrayBlock: %d\n", arrayBlock[pos-1]);
+            
             return arrayBlock[pos-1];
         }
         else{
@@ -174,9 +174,11 @@ int destroy_agent() //Esta función libera toda la memoria reservada por el GC
     for (int i = 0; i < pos; i++) 
     {
         free(arrayReference[i]);
+        free(arrayPointer[i]);
     }
-
+    
     //libera la memoria de los arrays
+    free(arrayReference);
     free(arrayPointer);
     free(arrayBlock);
     free(arraySZ);
@@ -184,4 +186,5 @@ int destroy_agent() //Esta función libera toda la memoria reservada por el GC
     free(arrayCantReference);
 
     pos = 0;
+    
 }
