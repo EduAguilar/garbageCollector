@@ -40,15 +40,14 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
     //printf("sz: %d\n", sz);
     //printf("name: %s\n", name);
     //printf("pos: %d\n", pos);
-         
+             
     if (sz>0 && sz<=memDisponible){
         
         int *block = (int*)malloc(sizeof(int)*sz); //se asigna la memoria dinamica al bloque
         arrayReference [pos] = (char**)malloc(sizeof(char)*strlen(name)); //asigna la memoria dinamica al array de referencias
                 
         if (block !=NULL){            
-            arrayPointer[pos] = block; //asigna el puntero al array de punteros
-            
+            arrayPointer[pos] = block; //asigna el puntero al array de punteros            
             arrayBlock[pos] = pos; //asigna el numero de bloque al array de bloques
             arraySZ[pos] = sz; //asigna el tamaño al array de tamaños de memoria de cada bloque
             arrayCantReference[pos] = 1; //asigna la cantidad de referencias al array de cantidades de referencias
@@ -62,9 +61,14 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
             return ERROR;
         }
     }
-    else{
-        //printf("Ya no hay memoria disponible.\n");
+    else if (cur_available_memory() == 0)
+    {
+        printf("Ya no hay memoria disponible.\n");
         return ERROR;
+    }    
+    else{
+        printf("No se reservo el bloque de memoria, la memoria es insuficiente.\n");  
+        printf("Su memoria disponible es: %d\n", cur_available_memory());      
     }
 }
 

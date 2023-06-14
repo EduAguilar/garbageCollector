@@ -61,7 +61,6 @@ int main() {
 	// Prueba de init_gc
 	init_gc(max_mem);
 
-
 	// Prueba de new_block
 	block1 = new_block(200, "Block 1");
 	block2 = new_block(300, "Block 2");
