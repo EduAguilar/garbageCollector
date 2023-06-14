@@ -15,6 +15,7 @@
 //Se declara las funciones del módulo
 int init_gc(int max_mem) //Esta función inicializa el GC.
 {
+    printf("Estoy en init_gc\n");
     memMax = max_mem;
     pos = 0;
 
@@ -33,6 +34,7 @@ int init_gc(int max_mem) //Esta función inicializa el GC.
 
 int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria.
 {
+    printf("Estoy en new_block\n");
     int memDisponible = cur_available_memory(); //se obtiene la memoria disponible
     //printf("Memoria disponible dentro del new_block: %d\n", memDisponible);
     //printf("sz: %d\n", sz);
@@ -68,6 +70,7 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
 
 int* mem_ptr(int block) //Esta función devuelve el puntero al bloque de memoria dado
 {
+    printf("Estoy en mem_ptr\n");
     if (block < 0 || block >= pos)
     {
         return ERROR;
@@ -80,6 +83,8 @@ int* mem_ptr(int block) //Esta función devuelve el puntero al bloque de memoria
 
 int resize(int block, int sz) //Esta función cambia el tamaño de memoria del bloque dado
 {
+    printf("Estoy en resize\n");
+
     if (block < 0 || block >= pos)
     {
         printf("Error: índice de bloque inválido\n");
@@ -89,6 +94,8 @@ int resize(int block, int sz) //Esta función cambia el tamaño de memoria del b
         printf("Error: Tamaño de memoria del bloque inválido\n");
         return ERROR;
     }
+
+    printf("estoy en resize, antes del realloc\n");
 
     int* new_block = (int*)realloc(arrayPointer[block], sizeof(int) * sz);
     
@@ -105,6 +112,7 @@ int resize(int block, int sz) //Esta función cambia el tamaño de memoria del b
 
 int add_reference(int block) //Esta función incrementa el contador de referencias del bloque dado
 {
+    printf("Estoy en add_reference\n");
     if (block < 0 || block >= pos)
     {
         printf("Error: índice de bloque inválido\n");
@@ -117,6 +125,7 @@ int add_reference(int block) //Esta función incrementa el contador de referenci
 
 int remove_reference(int block) //Esta función decrementa el contador de referencias del bloque dado
 {
+    printf("Estoy en remove_reference\n");
     if (block < 0 || block >= pos)
     {
         printf("Error: índice de bloque inválido\n");
@@ -160,7 +169,8 @@ int cur_available_memory(void) //Esta función devuelve la cantidad de memoria d
 }
 
 int destroy_agent() //Esta función libera toda la memoria reservada por el GC
-{        
+{       
+    printf("Estoy en destroy_agent\n"); 
     //liberamos la memoria de los arrays punteros
     for (int i = 0; i < pos; i++) 
     {

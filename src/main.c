@@ -2,6 +2,9 @@
 #include "garbage.c"
 
 int main() {
+
+    //Caso de prueba para aprobacion propio N°1---------------------------------------------
+/*
     char name[20]; //texto con la firma del proceso
     int sz =1; //tamaño de memoria
     int opcion =1; //variable para elegir si se quiere seguir creando bloques de memoria
@@ -45,10 +48,11 @@ int main() {
         printf("%s\n",arrayReference[i]);
     }
     */
-    return 0;	
+    //return 0;	*/
+//Fin Caso de prueba para aprobacion propio N°1---------------------------------------------
 
 
-/* Caso de prueba para aprobacion del tp    
+// Caso de prueba para aprobacion del tp    --------------------------------------------- 
     int max_mem = 1000;
 	int block1, block2, block3, block4;
 
@@ -61,23 +65,23 @@ int main() {
 	// Prueba de new_block
 	block1 = new_block(200, "Block 1");
 	block2 = new_block(300, "Block 2");
-	block3 = new_block(150, "Block 3");
-	block4 = new_block(400, "Block 4");
+	//block3 = new_block(150, "Block 3");
+	//block4 = new_block(400, "Block 4");
 	
 
 	// Prueba de resize
-	resize(block2, 400);
-	resize(block4, 250);
+	resize(1, 400);
+	//resize(block4, 250);
 
 	// Prueba de add_reference
-	add_reference(block1);
-	add_reference(block2);
-	add_reference(block2); // Agregar dos referencias al mismo bloque
-	add_reference(block3);
+	add_reference(0);
+	add_reference(1);
+	add_reference(1); // Agregar dos referencias al mismo bloque
+	//add_reference(block3);
 
 	// Prueba de remove_reference
-	remove_reference(block2);
-	remove_reference(block2); // Quitar una referencia más al mismo bloque
+	remove_reference(1);
+	remove_reference(1); // Quitar una referencia más al mismo bloque
 
 	// Prueba de used_memory
 	int used_mem = cur_used_memory();
@@ -88,8 +92,8 @@ int main() {
 	printf("Available memory: %d\n", available_mem);
 
 	// Prueba de destroy_agent
-	destroy_agent();
+	//destroy_agent();
 	
 	return 0;
-*/	
+// Fin caso de prueba para aprobacion del tp    --------------------------------------------- 	
 }
