@@ -55,8 +55,8 @@ int new_block(int sz,char* name) //Esta función crea un nuevo bloque de memoria
             strcpy(arrayReference[pos],name); //asigna el nombre de referencia al array de referencias
             
             pos++;
-
-            return OK;
+            printf("arrayBlock: %d\n", arrayBlock[pos-1]);
+            return arrayBlock[pos-1];
         }
         else{
             return ERROR;

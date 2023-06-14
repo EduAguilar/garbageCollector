@@ -70,18 +70,18 @@ int main() {
 	
 
 	// Prueba de resize
-	resize(1, 400);
+	resize(block2, 400);
 	//resize(block4, 250);
 
 	// Prueba de add_reference
-	add_reference(0);
-	add_reference(1);
-	add_reference(1); // Agregar dos referencias al mismo bloque
+	add_reference(block1);
+	add_reference(block2);
+	add_reference(block2); // Agregar dos referencias al mismo bloque
 	//add_reference(block3);
 
 	// Prueba de remove_reference
-	remove_reference(1);
-	remove_reference(1); // Quitar una referencia más al mismo bloque
+	remove_reference(block2);
+	remove_reference(block2); // Quitar una referencia más al mismo bloque
 
 	// Prueba de used_memory
 	int used_mem = cur_used_memory();
